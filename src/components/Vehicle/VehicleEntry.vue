@@ -1,15 +1,20 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import {Coordinate} from "../../ts/Coordinate.ts";
+import EditVehicle from "./EditVehicle.vue";
 import axios from "axios";
 
 export default defineComponent({
   name: "VehicleEntry",
 
+  components: {
+    EditVehicle
+  },
+
   data() {
     return {
       attachmentInfo: "",
-      noJob: "no previous job."
+      noJob: "no previous job.",
     }
   },
 
@@ -41,16 +46,21 @@ export default defineComponent({
       return Math.round(axis)
     },
 
-    getId(id: number | undefined) {
+    openVehicleModal(id: number | undefined) {
       console.log(id)
+      this.$emit("open")
     },
 
-    calculateWear(damage: number) {
-      return (damage * 100).toFixed(2)
+    calculateWear(damage: number | undefined) {
+      return damage != undefined ? (damage * 100).toFixed(1) : 0;
     },
 
-    calculateOperatingTime(operatingTime: number) {
-      return (operatingTime / 3600).toFixed(1)
+    calculateOperatingTime(operatingTime: number | undefined) {
+      return operatingTime != undefined ? (operatingTime / 3600).toFixed(1) : 0;
+    },
+
+    calculateFuel(fuel: number | undefined) {
+      return fuel != undefined ? fuel.toFixed(1) : 0;
     },
 
     async displayAttachmentInfo() {
@@ -86,8 +96,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div @click="getId(id)" class="entry">
+  <div class="entry">
     <div class="image-container">
+      <img v-if="propertyState != 'owned'" src="../../assets/key.svg" alt="lease icon" class="ownership">
       <img class="vehicle-image" src="../../assets/icon.png" alt="default icon"/>
       <div class="num-plate">{{ numberPlate }}</div>
     </div>
@@ -95,7 +106,7 @@ export default defineComponent({
       <div class="header">
         <div class="header-text">
           <h2>{{ name }}</h2>
-          <div class="ownership">{{ propertyState }}</div>
+          <a @click="openVehicleModal(id)">Edit</a>
         </div>
         <span class="attachment" v-if="attachmentInfo != ''">{{ attachmentInfo }}</span>
       </div>
@@ -114,15 +125,15 @@ export default defineComponent({
         <div class="row">
           <div class="data">
             <img class="icon" src="../../assets/time_good.svg" alt="Operating time icon"/>
-            <span class="value">{{ operatingTime }}</span>
+            <span class="value">{{ calculateOperatingTime(operatingTime) }}<b>Hrs</b></span>
           </div>
           <div class="data">
             <img class="icon" src="../../assets/wear.svg" alt="wear level icon"/>
-            <span class="value">{{ wear }}</span>
+            <span class="value">{{ calculateWear(wear) }}%</span>
           </div>
           <div class="data">
             <img class="icon" src="../../assets/fuel.svg" alt="fuel level icon"/>
-            <span class="value">{{ fuel }}</span>
+            <span class="value">{{ calculateFuel(fuel) }}L</span>
           </div>
         </div>
       </div>
@@ -140,34 +151,41 @@ h2 {
   color: rgba(178, 197, 225, 1);
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 400px;
+  text-overflow: ellipsis;
+  flex-grow: 1;
 }
 
 .entry {
   display: flex;
+  flex-direction: row;
   gap: 20px;
   align-items: start;
   text-align: left;
-  padding: 5px;
 }
 
 .vehicle-data {
   display: flex;
   flex-direction: column;
-  width: 100%;
-}
-
-.vehicle-image {
-  width: 125px;
-  height: auto;
-  border: 2px solid rgba(89, 89, 89, 0.30);
-  border-radius: 10px;
+  flex: 1 0;
 }
 
 .image-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 0 0 125px;
+  position: relative;
 }
+
+.vehicle-image {
+  border: 2px solid rgba(89, 89, 89, 0.30);
+  border-radius: 10px;
+  width: 100%;
+}
+
 
 .num-plate {
   font-family: 'Fira Code', monospace;
@@ -194,8 +212,19 @@ h2 {
 }
 
 .ownership {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 25%;
+  rotate: 40deg;
+}
+
+.red {
   color: #b32e2e;
-  font-family: 'Fira Code', monospace;
+}
+
+.yellow {
+  color: #DDB93B;
 }
 
 .row {
