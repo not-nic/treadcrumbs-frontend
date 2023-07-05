@@ -79,6 +79,7 @@ export default defineComponent({
 
 .error {
   color: #ff6666;
+  font-family: 'Fira Code', monospace;
   font-weight: bold;
 }
 
