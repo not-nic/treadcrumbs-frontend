@@ -5,9 +5,185 @@ import axios from "axios";
 export default defineComponent({
   name: "EditVehicle",
 
+  data() {
+    return {
+      name: "",
+      posX: null as number | null,
+      posY: null as number | null,
+      posZ: null as number | null,
+      propertyState: "",
+      lastJob: "",
+      age: null as number | null,
+      price: null as number | null,
+      operatingTime: null as number | null,
+      wear: null as number | null,
+      farmId: null as number | null,
+      numberPlate: "",
+      fuel: null as number | null,
+      attachments: {
+        type: Array as () => number[],
+        default: () => []
+      },
+
+      implements: [] as any[],
+      frontImplement: null as number | null,
+      backImplement: null as number | null
+
+    }
+  },
+
+  props: {
+    vehicleId: Number,
+    isCreatingVehicle: Boolean
+  },
+
+  mounted() {
+    this.getImplementData()
+  },
+
+  watch: {
+    vehicleId: {
+      immediate: true,
+      handler(newVal: number | undefined) {
+        this.getEditingVehicleData(newVal)
+      }
+    },
+
+    isCreatingVehicle: {
+      immediate: true,
+      handler() {
+        this.name = this.propertyState = this.lastJob = this.numberPlate = ""
+        this.posX = this.posY = this.posZ = this.wear = this.fuel = this.operatingTime = null;
+        this.frontImplement = this.backImplement = null;
+      }
+    }
+  },
+
   methods: {
     close(): void {
       this.$emit("close")
+    },
+
+    async getEditingVehicleData(id: number | undefined) {
+      try {
+        const response = await axios.get(`api/tractors/${id}`)
+        let vehicle = response.data;
+
+        this.name = vehicle.name;
+        this.posX = vehicle.position.x;
+        this.posY = vehicle.position.y;
+        this.posZ = vehicle.position.z;
+        this.propertyState = vehicle.propertyState;
+        this.lastJob = vehicle.aiLastJob;
+        this.age = vehicle.age;
+        this.price = vehicle.price;
+        this.operatingTime = vehicle.operatingTime;
+        this.wear = vehicle.damage;
+        this.farmId = vehicle.farmId;
+        this.numberPlate = vehicle.licencePlate;
+        this.fuel = vehicle.fuel;
+        this.frontImplement = vehicle.attachment.attachmentIds[0];
+        this.backImplement = vehicle.attachment.attachmentIds[1];
+
+      }
+      catch (error) {
+        console.error("Error getting information for vehicle with Id: ", id)
+      }
+    },
+
+    async getImplementData() {
+      try {
+        const response = await axios.get('api/implements');
+        const responseData = response.data;
+
+        this.implements = responseData.map((item: any) => ({
+          id: item.id,
+          name: item.name
+        }));
+
+      } catch (error) {
+        console.error("Error getting implement data: ", error)
+      }
+    },
+
+    async updateVehicleById(id?: number | undefined) {
+
+      const url: string = this.isCreatingVehicle ? `api/tractors/` : `api/tractors/${id}`
+
+      const attachments: {attachmentIds: number[] } = {
+        attachmentIds: []
+      }
+
+      if ( this.frontImplement!== null ) {
+        attachments.attachmentIds.push(this.frontImplement)
+      }
+
+      if ( this.backImplement!== null ) {
+        attachments.attachmentIds.push(this.backImplement)
+      }
+
+      try {
+        const response = await axios.post(url, {
+          name: this.name,
+          propertyState: this.propertyState,
+          age: this.age,
+          price: this.price,
+          operatingTime: this.operatingTime,
+          damage: this.wear,
+          farmId: this.farmId,
+          position: {x: this.posX, y: this.posY, z: this.posZ},
+          licencePlate: this.numberPlate,
+          aiLastJob: this.lastJob,
+          fuel: this.fuel,
+          attachment: attachments
+        });
+
+        this.close();
+
+        console.log(`Vehicle ${id} updated:`, response.data);
+
+      } catch (error) {
+        console.error(`Error updating vehicle ${id}:`, error);
+      }
+    },
+
+    async createVehicle() {
+      try {
+
+        const attachments: {attachmentIds: number[] } = {
+          attachmentIds: []
+        }
+
+        if ( this.frontImplement!== null ) {
+          attachments.attachmentIds.push(this.frontImplement)
+        }
+
+        if ( this.backImplement!== null ) {
+          attachments.attachmentIds.push(this.backImplement)
+        }
+
+        const response = await axios.post(`api/tractors/`, {
+          name: this.name,
+          propertyState: this.propertyState,
+          age: this.age,
+          price: this.price,
+          operatingTime: this.operatingTime,
+          damage: this.wear,
+          farmId: this.farmId,
+          position: {x: this.posX, y: this.posY, z: this.posZ},
+          licencePlate: this.numberPlate,
+          aiLastJob: this.lastJob,
+          fuel: this.fuel,
+          attachment: attachments
+        });
+
+        this.close();
+
+        console.log('Vehicle Created: ', response.data);
+
+      } catch (error) {
+        console.error('Error creating vehicle', error)
+      }
     }
   }
 })
