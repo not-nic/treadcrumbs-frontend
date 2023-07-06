@@ -139,16 +139,128 @@ h2 {
 }
 
 .box {
-  background: #232F41;
+  background: #212833;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.04);
-  border-radius: 10px;
-  width: 600px;
-  padding: 20px;
+  width: 720px;
+  padding: 10px;
   margin: auto;
 
+  border: 2px solid rgba(89, 89, 89, 0.30);
+  border-radius: 15px;
+}
+
+.container {
+  padding: 15px;
+  background-color: #1e242e;
+  border: 2px solid rgba(89, 89, 89, 0.30);
+  border-radius: 15px;
+
+  width: 100%;
+}
+
+.header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
+form {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.edit {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 15px 0 0 0;
+  text-align: start;
+  flex-grow: 0;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  text-align: start;
+  padding: 15px 0 0 0;
+  width: 100%;
+
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.pos, .additional, .attachment {
+  display: flex;
+  justify-content: space-between;
+}
+
+.small {
+  max-width: 130px;
+}
+
+.med {
+  max-width: 210px;
+}
+
+label {
+  padding-left: 10px;
+  font-family: 'Overpass', sans-serif;
+  color: #B2C5E1;
+}
+
+input, button, select, option {
+  border-radius: 8px;
+  border: 2px solid #232f41;
+  background: #1b2029;
+  padding: 15px 10px 15px 15px;
+
+  font-family: 'Fira Code', monospace;
+  color: #636E7E;
+}
+
+input:focus {
+  border: 2px solid #B2C5E1;
+  background: #242a34;
+  outline: none;
+  color: #95A5BD;
+}
+
+.submit:hover, button:hover {
+  border: 2px solid #B2C5E1;
+  background: #242a34;
+  outline: none;
+  color: #95A5BD;
+}
+
+img {
+  max-width: 200px;
+  border: 2px solid #232f41;
+  border-radius: 8px;
+  background: linear-gradient(0deg, rgb(27, 32, 41) 0%, rgb(27, 32, 41) 100%);
+}
+
+button {
+  width: 200px;
+}
+
 </style>
