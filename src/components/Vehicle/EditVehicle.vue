@@ -243,6 +243,7 @@ export default defineComponent({
                     <label>Front Attachment:</label>
                     <select class="med" v-model="frontImplement" @click="">
                       <option disabled value="">Select front implement.</option>
+                      <option :value="null">none</option>
                       <option v-for="implement in implements" :key="implement.id" :value="implement.id">{{implement.name}}</option>
                     </select>
                   </div>
@@ -250,6 +251,7 @@ export default defineComponent({
                     <label>Back Attachment:</label>
                     <select class="med" v-model="backImplement">
                       <option disabled value="">Select back implement.</option>
+                      <option :value="null">none</option>
                       <option v-for="implement in implements" :key="implement.id" :value="implement.id">{{implement.name}}</option>
                     </select>
                   </div>
