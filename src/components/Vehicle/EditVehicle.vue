@@ -1,5 +1,6 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
+import axios from "axios";
 
 export default defineComponent({
   name: "EditVehicle",
@@ -15,10 +16,88 @@ export default defineComponent({
 <template>
   <div class="mask">
     <div class="box">
-      <h2>Vehicle Information</h2>
-      <svg @click="close()" class="close" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.73077 14.4231C1.41214 14.7417 0.895549 14.7417 0.576923 14.4231C0.258297 14.1045 0.258297 13.5879 0.576923 13.2692L4.93194 8.91421C5.71299 8.13316 5.71299 6.86684 4.93194 6.08579L0.576923 1.73077C0.258297 1.41214 0.258297 0.895549 0.576923 0.576923C0.895549 0.258297 1.41214 0.258297 1.73077 0.576923L6.08579 4.93194C6.86684 5.71299 8.13317 5.71299 8.91421 4.93194L13.2692 0.576923C13.5879 0.258297 14.1045 0.258297 14.4231 0.576923C14.7417 0.895549 14.7417 1.41214 14.4231 1.73077L10.0681 6.08579C9.28701 6.86684 9.28701 8.13317 10.0681 8.91421L14.4231 13.2692C14.7417 13.5879 14.7417 14.1045 14.4231 14.4231C14.1045 14.7417 13.5879 14.7417 13.2692 14.4231L8.91421 10.0681C8.13316 9.28701 6.86684 9.28701 6.08579 10.0681L1.73077 14.4231Z" fill="#B2C5E1"/>
-      </svg>
+      <div class="container">
+        <div class="header">
+          <h2 v-if="isCreatingVehicle">New Vehicle Information</h2>
+          <h2 v-else>Vehicle Information</h2>
+          <svg @click="close()" class="close" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.73077 14.4231C1.41214 14.7417 0.895549 14.7417 0.576923 14.4231C0.258297 14.1045 0.258297 13.5879 0.576923 13.2692L4.93194 8.91421C5.71299 8.13316 5.71299 6.86684 4.93194 6.08579L0.576923 1.73077C0.258297 1.41214 0.258297 0.895549 0.576923 0.576923C0.895549 0.258297 1.41214 0.258297 1.73077 0.576923L6.08579 4.93194C6.86684 5.71299 8.13317 5.71299 8.91421 4.93194L13.2692 0.576923C13.5879 0.258297 14.1045 0.258297 14.4231 0.576923C14.7417 0.895549 14.7417 1.41214 14.4231 1.73077L10.0681 6.08579C9.28701 6.86684 9.28701 8.13317 10.0681 8.91421L14.4231 13.2692C14.7417 13.5879 14.7417 14.1045 14.4231 14.4231C14.1045 14.7417 13.5879 14.7417 13.2692 14.4231L8.91421 10.0681C8.13316 9.28701 6.86684 9.28701 6.08579 10.0681L1.73077 14.4231Z" fill="#B2C5E1"/>
+          </svg>
+        </div>
+        <div class="content">
+          <form onsubmit="return false">
+            <div class="form-body">
+              <div class="form-column">
+                <div class="form-row">
+                  <label>Vehicle Name:</label>
+                  <input v-model="name" type="text" placeholder="e.g. John Deere 6R"/>
+                </div>
+                <div class="form-row">
+                  <label>Last Job:</label>
+                  <input v-model="lastJob" placeholder="e.g. Sowing" type="text"/>
+                </div>
+                <div class="form-row">
+                  <label>Number Plate:</label>
+                  <input v-model="numberPlate" placeholder="e.g. GK23 FLP" type="text"/>
+                </div>
+                <div class="form-row">
+                  <label>Position: (x, y, z)</label>
+                  <div class="pos">
+                    <input v-model="posX" class="small" placeholder="69.69" type="text"/>
+                    <input v-model="posY" class="small" placeholder="69.69" type="text"/>
+                    <input v-model="posZ" class="small" placeholder="69.69" type="text"/>
+                  </div>
+                </div>
+                <div class="additional">
+                  <div class="form-row">
+                    <label>Wear:</label>
+                    <input v-model="wear" placeholder="0.459" class="small" type="text"/>
+                  </div>
+                  <div class="form-row">
+                    <label>Fuel:</label>
+                    <input v-model="fuel" placeholder="0.912" class="small" type="text"/>
+                  </div>
+                  <div class="form-row">
+                    <label>Work Hours:</label>
+                    <input v-model="operatingTime" placeholder="49" class="small" type="text"/>
+                  </div>
+                </div>
+                <div class="attachment">
+                  <div class="form-row">
+                    <label>Front Attachment:</label>
+                    <select class="med" v-model="frontImplement" @click="">
+                      <option disabled value="">Select front implement.</option>
+                      <option v-for="implement in implements" :key="implement.id" :value="implement.id">{{implement.name}}</option>
+                    </select>
+                  </div>
+                  <div class="form-row">
+                    <label>Back Attachment:</label>
+                    <select class="med" v-model="backImplement">
+                      <option disabled value="">Select back implement.</option>
+                      <option v-for="implement in implements" :key="implement.id" :value="implement.id">{{implement.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <label>Ownership:</label>
+                  <select v-model="propertyState">
+                    <option>owned</option>
+                    <option>leased</option>
+                  </select>
+                </div>
+              </div>
+              <div class="edit">
+                <label>Vehicle Image:</label>
+                <img src="../../assets/icon.png" alt="tractor icon">
+                <button>edit picture</button>
+              </div>
+            </div>
+
+            <input v-if="isCreatingVehicle" @click="createVehicle()" class="submit" type="submit" value="Create Vehicle">
+            <input v-else @click="updateVehicleById(vehicleId)" class="submit" type="submit" value="Save Changes">
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>
