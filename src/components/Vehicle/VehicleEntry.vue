@@ -47,8 +47,7 @@ export default defineComponent({
     },
 
     openVehicleModal(id: number | undefined) {
-      console.log(id)
-      this.$emit("open")
+      this.$emit("open", id)
     },
 
     calculateWear(damage: number | undefined) {
@@ -129,11 +128,11 @@ export default defineComponent({
           </div>
           <div class="data">
             <img class="icon" src="../../assets/wear.svg" alt="wear level icon"/>
-            <span class="value">{{ calculateWear(wear) }}%</span>
+            <span class="value">{{ calculateWear(wear) }}<b>%</b></span>
           </div>
           <div class="data">
             <img class="icon" src="../../assets/fuel.svg" alt="fuel level icon"/>
-            <span class="value">{{ calculateFuel(fuel) }}L</span>
+            <span class="value">{{ calculateFuel(fuel) }}<b>L</b></span>
           </div>
         </div>
       </div>
@@ -217,14 +216,6 @@ h2 {
   left: 8px;
   width: 25%;
   rotate: 40deg;
-}
-
-.red {
-  color: #b32e2e;
-}
-
-.yellow {
-  color: #DDB93B;
 }
 
 .row {
