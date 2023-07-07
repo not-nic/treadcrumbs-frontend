@@ -21,7 +21,7 @@ export class Coordinate {
         return this._y;
     }
 
-    set     y(value: number) {
+    set y(value: number) {
         this._y = value;
     }
 

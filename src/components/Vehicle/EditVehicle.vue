@@ -282,14 +282,6 @@ export default defineComponent({
 
 <style scoped>
 
-h2 {
-  margin: 0;
-  color: rgba(178, 197, 225, 1);
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  text-align: start;
-}
-
 .close {
   max-width: 28px;
   padding: 5px;

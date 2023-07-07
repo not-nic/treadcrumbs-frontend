@@ -141,10 +141,6 @@ export default defineComponent({
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-
 h2 {
   margin: 0;
   color: rgba(178, 197, 225, 1);
