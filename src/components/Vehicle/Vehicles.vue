@@ -78,7 +78,9 @@ export default defineComponent({
     editingVehicle(vehicleId: number): void {
       this.isEditingVehicle = true;
       this.selectedVehicleId = vehicleId;
-      console.log("clicked on vehicle: ", vehicleId)
+
+      // debug print
+      // console.log("clicked on vehicle: ", vehicleId)
     },
 
     async getData() {
@@ -97,14 +99,6 @@ export default defineComponent({
 
 <style scoped>
 
-h2 {
-  margin: 0;
-  color: rgba(178, 197, 225, 1);
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  text-align: start;
-}
-
 .dashboard-element {
   display: flex;
   flex-direction: row;
@@ -113,27 +107,11 @@ h2 {
 }
 
 .buttons {
-  display: flex;
-  flex-direction: row;
-  width: 80px;
-  justify-content: space-around;
-}
-
-.refresh, .add {
-  max-width: 28px;
-  padding: 5px;
-}
-
-.refresh {
-  transition: transform 0.6s cubic-bezier(0.83, 0, 0.17, 1);
-}
-
-.refresh:hover, .add:hover {
-  max-width: 28px;
-  padding: 5px;
-  fill-opacity: 0.5;
-  transform: rotate(360deg);
-}
+   display: flex;
+   flex-direction: row;
+   width: 80px;
+   gap: 10px;
+ }
 
 .vehicle {
   width: 100%;
