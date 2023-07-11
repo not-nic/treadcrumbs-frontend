@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
 :root {
@@ -113,6 +113,38 @@ h2 {
   text-align: start;
 }
 
+.row {
+  display: flex;
+  gap: 10px;
+  justify-content: start;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: first baseline;
+}
+
+.key {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 300;
+  color: rgba(178, 197, 225, 0.80);
+  padding: 5px;
+}
+
+.value {
+  font-family: 'Fira Code', monospace;
+  font-weight: 300;
+  padding: 5px;
+}
+
+.green {
+  color: #85a52e;
+}
+
+.red {
+  color: #a42d2e;
+}
 
 @media (prefers-color-scheme: light) {
   :root {

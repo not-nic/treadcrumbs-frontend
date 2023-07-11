@@ -34,14 +34,7 @@ export default defineComponent({
 <style scoped>
 .stat {
   display: flex;
-  text-align: left;
-  gap: 10px;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
+  gap: 20px;
 }
 
 b {
@@ -52,13 +45,5 @@ b {
   font-family: "Fira Code", monospace;
   text-overflow: ellipsis;
   font-weight: 300;
-}
-
-.green {
-  color: #85a52e;
-}
-
-.red {
-  color: #a42d2e;
 }
 </style>
