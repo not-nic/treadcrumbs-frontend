@@ -79,7 +79,6 @@ export default defineComponent({
 
       for (let i = 0; i < attachments.length; i++) {
         const currAttachment = attachments[i];
-
         try {
           const response = await axios.get(`api/implements/${currAttachment}`)
           results.push(response.data.name);
@@ -180,7 +179,6 @@ h2 {
   border-radius: 10px;
   width: 100%;
 }
-
 
 .num-plate {
   font-family: 'Fira Code', monospace;
