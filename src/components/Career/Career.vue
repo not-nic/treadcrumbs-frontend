@@ -3,6 +3,8 @@ import {defineComponent} from 'vue'
 import axios from "axios";
 import FarmElement from "./FarmElement.vue";
 import { Farm } from "../../ts/Farm.ts";
+import Finances from "./FinanceElement.vue";
+import FinanceElement from "./FinanceElement.vue";
 
 interface Career {
   id: Number,
@@ -14,7 +16,7 @@ interface Career {
 
 export default defineComponent({
   name: "Career",
-  components: {FarmElement},
+  components: {FinanceElement, Finances, FarmElement},
 
   computed: {
     Farm() {
@@ -49,22 +51,21 @@ export default defineComponent({
       try {
         const response = await axios.get('/api/farm')
         this.farm = response.data[0]
+
+        // console.log(this.farm)
       } catch (error) {
         console.error("Error getting Farm: ", error)
       }
     },
   }
 })
-
-
-
 </script>
 
 <template>
 <div class="container">
   <div class="career">
     <div class="dashboard-element">
-      <h2>Farm Info</h2>
+      <h2>Farm Finances</h2>
       <div class="buttons">
         <a>Edit</a>
         <svg @click="getCareer()" class="refresh" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -96,13 +97,13 @@ export default defineComponent({
         </div>
       </div>
       <farm-element :farm="new Farm(farm.id, farm.farmName, farm.loan, farm.money, farm.players)"></farm-element>
+      <finance-element></finance-element>
     </div>
   </div>
 </div>
 </template>
 
 <style scoped>
-
 .container {
   width: 660px;
   padding: 15px;
@@ -112,37 +113,19 @@ export default defineComponent({
 }
 
 .career {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   background: rgba(0, 0, 0, 0.10);
   padding: 20px;
   height: 100%;
-  width: 100%;
   overflow: auto;
   border: 2px solid rgba(89, 89, 89, 0.30);
   border-radius: 15px;
 }
 
-.row {
-  display: flex;
-  gap: 10px;
-  justify-content: start;
-}
-
-.item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.key {
-  font-family: 'Overpass', sans-serif;
-  color: rgba(178, 197, 225, 0.80);
-  padding: 5px;
-}
-
 .value {
-  font-family: 'Fira Code', monospace;
-  font-weight: 300;
   color: #B36A2E;
-  padding: 5px;
 }
+
 </style>
