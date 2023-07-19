@@ -24,7 +24,7 @@ export default defineComponent({
     data: {
       immediate: true,
       handler(newValue, oldValue) {
-        console.log('Data Changed:', newValue, oldValue)
+        // console.log('Data Changed:', newValue, oldValue)
       }
     }
   }
