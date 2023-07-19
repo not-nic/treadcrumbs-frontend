@@ -115,12 +115,10 @@ export default defineComponent({
       this.pieChartData.datasets[0].backgroundColor = this.filteredFields.map((field) =>
           this.getCropColour(field.currentCrop)
       );
-
-      console.log(this.pieChartData)
     },
 
     formatHectare(value: number): number {
-      return (value / 1000)
+      return (value / 10000)
     },
 
     calculateTotalFarmSize(): number {
