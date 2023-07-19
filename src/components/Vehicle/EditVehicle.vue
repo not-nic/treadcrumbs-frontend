@@ -288,8 +288,6 @@ export default defineComponent({
 }
 
 .close:hover {
-  max-width: 28px;
-  padding: 5px;
   fill-opacity: 0.5;
 }
 
