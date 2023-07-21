@@ -2,7 +2,7 @@
 import {defineComponent} from 'vue'
 import {Field} from "./FieldTable.vue";
 import axios from "axios";
-import OwnedFields from "./OwnedFields.vue";
+import OwnedFields from "./OwnedField.vue";
 import EditField from "./EditField.vue";
 
 export default defineComponent({
@@ -33,6 +33,7 @@ export default defineComponent({
       try {
         const response = await axios.get('api/fields/owned');
         this.ownedFields = response.data;
+        this.ownedFields.sort((a, b) => (a.farmlandId < b.farmlandId ? -1 : 1))
 
       } catch (error) {
         console.error(error)
@@ -58,12 +59,11 @@ export default defineComponent({
           </svg>
         </div>
         <div class="content">
-          <div class="owned-fields">
-            <span v-show="displayFields">Select from owned fields:</span>
+          <div class="field-container">
+            <owned-fields v-show="displayFields" @field="setId"  v-for="field in ownedFields" :key="field.id" :field="field"></owned-fields>
+            <edit-field v-show="!displayFields" :creating-field="false" @close="close()" :field="currentField"></edit-field>
+            <edit-field v-show="displayFields" :creating-field="true"  @close="close()" :field="newField"></edit-field>
           </div>
-          <owned-fields v-show="displayFields" @field="setId"  v-for="field in ownedFields" :key="field.id" :field="field"></owned-fields>
-          <edit-field v-show="!displayFields" :creating-field="false" :field="currentField"></edit-field>
-          <edit-field v-show="displayFields" :creating-field="true" :field="newField"></edit-field>
         </div>
       </div>
     </div>
@@ -114,6 +114,7 @@ export default defineComponent({
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 20px;
 }
 
 .close {
@@ -144,6 +145,12 @@ span {
   font-family: 'Overpass', sans-serif;
   font-weight: 300;
   color: rgba(178, 197, 225, 0.8);
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 </style>
