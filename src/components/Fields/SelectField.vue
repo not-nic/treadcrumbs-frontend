@@ -126,19 +126,11 @@ export default defineComponent({
   fill-opacity: 0.5;
 }
 
-.owned-fields {
-  padding-top: 20px;
-}
-
 h3 {
   margin: 0;
   color: rgba(178, 197, 225, 1);
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
-}
-
-.owned-fields {
-  display: flex;
 }
 
 span {
