@@ -164,11 +164,13 @@ export default defineComponent({
 
 .table {
   flex: 1;
+  max-height: 270px;
+  overflow: auto;
 }
 
 table {
   width: 100%;
-  height: 100%;
+  overflow: auto;
 }
 
 .circle {
