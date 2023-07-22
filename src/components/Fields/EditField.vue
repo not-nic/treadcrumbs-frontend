@@ -35,6 +35,8 @@ export default defineComponent({
 
         console.log(`Field ${id} updated:`, response.data);
 
+        this.$emit("close")
+
       } catch (error) {
         console.error(error)
       }
@@ -46,37 +48,37 @@ export default defineComponent({
 <template>
   <div>
     <h2 v-if="!creatingField">Editing field {{field.id}}:</h2>
-    <h2 v-else>Creating New field</h2>
+    <h2 v-else>Create New field</h2>
     <form onsubmit="return false">
       <div class="form-body">
         <div class="form-column">
           <div class="form-row">
             <label>Previous Crop:</label>
-            <input v-model="field.previousCrop" type="text" placeholder="E.g. Oats"/>
+            <input v-model="field.previousCrop" type="text"  placeholder="E.g. Oats"/>
           </div>
           <div class="form-row">
             <label>Current Crop:</label>
-            <input v-model="field.currentCrop" type="text" placeholder="E.g. Barley"/>
+            <input v-model="field.currentCrop" type="text" required placeholder="E.g. Barley"/>
           </div>
           <div class="form-row">
             <label>Farmland Id:</label>
-            <input v-model="field.farmlandId" type="text" placeholder="E.g. Oats"/>
+            <input v-model="field.farmlandId" type="text" required placeholder="E.g. 13"/>
           </div>
           <div class="form-row">
             <label>Growth Stage:</label>
-            <input v-model="field.growthStage" type="text" placeholder="E.g. 1/5"/>
+            <input v-model="field.growthStage" type="text" required placeholder="E.g. 1/5"/>
           </div>
           <div class="form-row">
             <label>Field Size:</label>
-            <input v-model="field.fieldSizeHa" type="text" placeholder="E.g. 14.5Ha"/>
+            <input v-model="field.fieldSizeHa" type="text" required placeholder="E.g. 14.5Ha"/>
           </div>
           <div class="form-row">
             <label>Fertilizer Level:</label>
-            <input v-model="field.fertilized" type="text" placeholder="E.g. 160kg/ha"/>
+            <input v-model="field.fertilized" type="text" required placeholder="E.g. 160kg/ha"/>
           </div>
           <div class="form-row">
             <label>Lime Level:</label>
-            <input v-model="field.limed" type="text" placeholder="E.g. 6.5000/ha"/>
+            <input v-model="field.limed" type="text" required placeholder="E.g. 6.5000/ha"/>
           </div>
           <div class="form-row">
             <label>Ownership:</label>

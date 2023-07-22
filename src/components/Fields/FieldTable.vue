@@ -3,6 +3,7 @@ import {defineComponent} from 'vue'
 import axios from "axios";
 import FarmSize from "./FarmSize.vue";
 import FieldChart from "./FieldChart.vue";
+import { crops } from '../../ts/Crops.ts'
 
 export interface Field {
   id: number,
@@ -31,26 +32,7 @@ export default defineComponent({
   data() {
     return {
       fields: [] as Field[],
-
-      crops: [
-        {name: "Wheat", colour: "#ceab4f"},
-        {name: "Barley", colour: "#897247"},
-        {name: "Canola", colour: "#9cc251"},
-        {name: "Oats", colour: "#b36a2e"},
-        {name: "Corn", colour: "#e89a2e"},
-        {name: "Sunflowers", colour: "#eacb22"},
-        {name: "Grapes", colour: "#5b5a8d"},
-        {name: "Grass", colour: "#3b622a"},
-        {name: "Oilseed", colour: "#49b484"},
-        {name: "Soybeans", colour: "#81852e"},
-        {name: "Potatoes", colour: "#8c634f"},
-        {name: "Sugar beet", colour: "#d9a38f"},
-        {name: "Sugarcane", colour: "#c2d79a"},
-        {name: "Cotton", colour: "#f2e8e6"},
-        {name: "Sorghum", colour: "#704f42"},
-        {name: "Olives", colour: "#543c52"},
-        {name: "Poplar", colour: "#5d7064"},
-      ],
+      crops: crops
     }
   },
 
@@ -182,11 +164,13 @@ export default defineComponent({
 
 .table {
   flex: 1;
+  max-height: 270px;
+  overflow: auto;
 }
 
 table {
   width: 100%;
-  height: 100%;
+  overflow: auto;
 }
 
 .circle {
