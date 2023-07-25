@@ -3,6 +3,7 @@ import {defineComponent, onMounted, ref} from 'vue'
 import {Field} from "./FieldTable.vue";
 import EditField from "./EditField.vue";
 import {crops} from "../../ts/Crops.ts";
+import {useFieldStore} from "../../stores/FieldStore.ts";
 import axios from "axios";
 
 export default defineComponent({
@@ -36,11 +37,13 @@ export default defineComponent({
   data() {
     return {
       crops: crops,
+      profit: Number,
+      yield: Number,
+      crop: String
     }
   },
 
   methods: {
-
     booleanToText(value: boolean): string {
       return value ? "Yes" : "No";
     },
@@ -56,6 +59,19 @@ export default defineComponent({
 
     formatHectare(value: number): number {
       return (value / 10000)
+    },
+
+    getCropName(cropName: string): string | undefined {
+      const crop = crops.find(c => c.name === cropName);
+      let currentCrop =  crop ? crop.name : undefined
+
+      if (currentCrop != undefined) {
+        return this.crop = currentCrop;
+      }
+
+      console.log("crop does not exist");
+
+      return this.crop = undefined;
     },
 
     growthCalculator(currentGrowthStage: number, cropName: string): string {
@@ -182,7 +198,10 @@ export default defineComponent({
         multiple = 1
       }
 
-      return new Intl.NumberFormat('en-gb', {style: 'currency', currency: 'GBP'}).format((pricePerL * totalYield) * multiple)
+      let profit = (pricePerL * totalYield) * multiple
+
+      this.profit = profit;
+      return  new Intl.NumberFormat('en-gb', {style: 'currency', currency: 'GBP'}).format(profit)
     },
 
     calculateYield(field: Field): number {
@@ -200,7 +219,22 @@ export default defineComponent({
       let plowingBonus = field.plowed ? (yieldPerHa * 15) / 100 : 0
       let mulchingBonus = field.mulched ? (yieldPerHa * 2.5) / 100 : 0
 
-      return (yieldPerHa + fertilizerYieldBonus + pHYieldBonus + weedControlBonus + plowingBonus + mulchingBonus) * this.formatHectare(field.fieldSizeHa)
+      let totalYield = (yieldPerHa + fertilizerYieldBonus + pHYieldBonus + weedControlBonus + plowingBonus + mulchingBonus) * this.formatHectare(field.fieldSizeHa)
+
+      this.yield = totalYield;
+      return totalYield
+    },
+
+    harvestField(field: Field) {
+      const fieldStore = useFieldStore();
+      fieldStore.openHarvestModal();
+
+      this.getCropName(field.currentCrop)
+
+      fieldStore.currentProfit = this.profit;
+      fieldStore.currentYield = this.yield;
+      fieldStore.currentCrop = this.crop;
+      fieldStore.currentField = field;
     }
   }
 })
@@ -213,6 +247,9 @@ export default defineComponent({
         <img :src="getCropImage(field.currentCrop)" alt="crop icon">
         <h3>Field {{field.farmlandId}}</h3>
         <h3 class="ha">[{{ (field.fieldSizeHa / 10000).toFixed(2) }}Ha]</h3>
+      </div>
+      <div class="functions">
+        <a @click="harvestField(field)">Harvest</a>
       </div>
       <div class="edit">
         <a @click="sendField(field)">Edit</a>
@@ -339,6 +376,12 @@ h3 {
 
 .edit {
   padding: 10px;
+}
+
+.functions {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .field-content {

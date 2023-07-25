@@ -2,12 +2,12 @@
 import {defineComponent} from 'vue'
 import {Field} from "./FieldTable.vue";
 import axios from "axios";
-import OwnedFields from "./OwnedField.vue";
+import OwnedField from "./OwnedField.vue";
 import EditField from "./EditField.vue";
 
 export default defineComponent({
   name: "selectField",
-  components: {EditField, OwnedFields},
+  components: {EditField, OwnedField},
 
   data() {
     return {
@@ -43,7 +43,7 @@ export default defineComponent({
     setId(field: Field): void {
       this.currentField = field;
       this.displayFields = false;
-    }
+    },
   }
 })
 </script>
@@ -60,7 +60,7 @@ export default defineComponent({
         </div>
         <div class="content">
           <div class="field-container">
-            <owned-fields v-show="displayFields" @field="setId"  v-for="field in ownedFields" :key="field.id" :field="field"></owned-fields>
+            <owned-field v-show="displayFields" @field="setId"  v-for="field in ownedFields" :key="field.id" :field="field"></owned-field>
             <edit-field v-show="!displayFields" :creating-field="false" @close="close()" :field="currentField"></edit-field>
             <edit-field v-show="displayFields" :creating-field="true"  @close="close()" :field="newField"></edit-field>
           </div>

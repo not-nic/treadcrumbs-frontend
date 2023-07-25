@@ -2,24 +2,35 @@
 import {defineComponent} from 'vue'
 import FieldTable from "./FieldTable.vue";
 import SelectField from "./SelectField.vue";
+import HarvestModal from "./HarvestModal.vue";
+import { useFieldStore } from "../../stores/FieldStore.ts";
 
 export default defineComponent({
   name: "Fields",
-  components: {SelectField, FieldTable},
+  components: {HarvestModal, SelectField, FieldTable},
+
+  computed: {
+    openModal() {
+      const fieldStore = useFieldStore();
+      return fieldStore.showHarvestModal
+    }
+  },
 
   data() {
     return {
-      showFields: false
+      showFields: false,
     }
-  }
+  },
+
 })
 </script>
 
 <template>
 
   <SelectField @close="showFields = false" v-show="showFields">
-
   </SelectField>
+
+  <harvest-modal v-show="openModal"></harvest-modal>
 
 <div class="container">
   <div class="field">
