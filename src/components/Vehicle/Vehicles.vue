@@ -106,13 +106,6 @@ export default defineComponent({
   justify-content: space-between;
 }
 
-.buttons {
-   display: flex;
-   flex-direction: row;
-   width: 80px;
-   gap: 10px;
- }
-
 .vehicle {
   width: 100%;
   display: flex;
