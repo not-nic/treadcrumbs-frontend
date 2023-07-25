@@ -198,7 +198,10 @@ export default defineComponent({
         multiple = 1
       }
 
-      return new Intl.NumberFormat('en-gb', {style: 'currency', currency: 'GBP'}).format((pricePerL * totalYield) * multiple)
+      let profit = (pricePerL * totalYield) * multiple
+
+      this.profit = profit;
+      return  new Intl.NumberFormat('en-gb', {style: 'currency', currency: 'GBP'}).format(profit)
     },
 
     calculateYield(field: Field): number {
@@ -216,7 +219,22 @@ export default defineComponent({
       let plowingBonus = field.plowed ? (yieldPerHa * 15) / 100 : 0
       let mulchingBonus = field.mulched ? (yieldPerHa * 2.5) / 100 : 0
 
-      return (yieldPerHa + fertilizerYieldBonus + pHYieldBonus + weedControlBonus + plowingBonus + mulchingBonus) * this.formatHectare(field.fieldSizeHa)
+      let totalYield = (yieldPerHa + fertilizerYieldBonus + pHYieldBonus + weedControlBonus + plowingBonus + mulchingBonus) * this.formatHectare(field.fieldSizeHa)
+
+      this.yield = totalYield;
+      return totalYield
+    },
+
+    harvestField(field: Field) {
+      const fieldStore = useFieldStore();
+      fieldStore.openHarvestModal();
+
+      this.getCropName(field.currentCrop)
+
+      fieldStore.currentProfit = this.profit;
+      fieldStore.currentYield = this.yield;
+      fieldStore.currentCrop = this.crop;
+      fieldStore.currentField = field;
     }
   }
 })
