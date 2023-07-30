@@ -17,7 +17,7 @@ import Vehicles from "../components/Vehicle/Vehicles.vue";
 import Career from "../components/Career/Career.vue";
 import Fields from "../components/Fields/Fields.vue";
 import Map from "../components/Map/Map.vue";
-import Note from "../components/Notes/Note.vue"
+import Note from "../components/Notes/Notes.vue"
 export default {
   name: "Dashboard",
   components: {Fields, Career, Vehicles, Map, Note}

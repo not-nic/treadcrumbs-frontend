@@ -22,6 +22,7 @@ export  const useFieldStore = defineStore('fieldStore', {
             this.showHarvestModal = false;
         },
 
+        // TODO: Rewrite this function as it is horrible.
         async harvestField(existingField: Field): Promise<FieldImpl> {
             let updatedField = new FieldImpl();
             const crop = crops.find(c => c.name === existingField.currentCrop);
@@ -84,7 +85,6 @@ export  const useFieldStore = defineStore('fieldStore', {
 
             // field is a not root crop and is already plowed.
             return !rootCrop && plowed;
-
         }
     }
 })

@@ -53,7 +53,7 @@ export default defineComponent({
     <div class="box">
       <div class="container">
         <div class="header">
-          <h2>Update Fields</h2>
+          <h2>Your Fields</h2>
           <svg @click="close()" class="close" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.73077 14.4231C1.41214 14.7417 0.895549 14.7417 0.576923 14.4231C0.258297 14.1045 0.258297 13.5879 0.576923 13.2692L4.93194 8.91421C5.71299 8.13316 5.71299 6.86684 4.93194 6.08579L0.576923 1.73077C0.258297 1.41214 0.258297 0.895549 0.576923 0.576923C0.895549 0.258297 1.41214 0.258297 1.73077 0.576923L6.08579 4.93194C6.86684 5.71299 8.13317 5.71299 8.91421 4.93194L13.2692 0.576923C13.5879 0.258297 14.1045 0.258297 14.4231 0.576923C14.7417 0.895549 14.7417 1.41214 14.4231 1.73077L10.0681 6.08579C9.28701 6.86684 9.28701 8.13317 10.0681 8.91421L14.4231 13.2692C14.7417 13.5879 14.7417 14.1045 14.4231 14.4231C14.1045 14.7417 13.5879 14.7417 13.2692 14.4231L8.91421 10.0681C8.13316 9.28701 6.86684 9.28701 6.08579 10.0681L1.73077 14.4231Z" fill="#B2C5E1"/>
           </svg>
@@ -61,9 +61,9 @@ export default defineComponent({
         <div class="content">
           <div class="field-container">
             <owned-field v-show="displayFields" @field="setId"  v-for="field in ownedFields" :key="field.id" :field="field"></owned-field>
-            <edit-field v-show="!displayFields" :creating-field="false" @close="close()" :field="currentField"></edit-field>
-            <edit-field v-show="displayFields" :creating-field="true"  @close="close()" :field="newField"></edit-field>
           </div>
+          <edit-field v-show="!displayFields" :creating-field="false" @close="close()" :field="currentField"></edit-field>
+          <edit-field v-show="displayFields" :creating-field="true"  @close="close()" :field="newField"></edit-field>
         </div>
       </div>
     </div>
@@ -89,8 +89,8 @@ export default defineComponent({
 .box {
   background: #212833;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.04);
-  width: 720px;
-  height: 800px;
+  width: 55%;
+  height: 80%;
   padding: 10px;
   margin: auto;
 
@@ -107,6 +107,12 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   overflow: auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .header {
@@ -141,8 +147,12 @@ span {
 
 .field-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
+
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
 }
 
 </style>
