@@ -55,11 +55,12 @@ export default defineComponent({
 <style scoped>
   .argument {
     display: flex;
+    width: 100%;
     flex-direction: row;
-    gap: 10px;
+    gap: 5px;
   }
 
   input {
-    width: 25%;
+    width: 100%;
   }
 </style>
