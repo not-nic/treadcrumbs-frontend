@@ -12,6 +12,7 @@ export default defineComponent({
   },
 
   props: {
+    url: String,
     title: String,
     subtext: String,
     command: String,
@@ -30,6 +31,7 @@ export default defineComponent({
       this.noteStore.updateArguments(this.arguments);
       this.noteStore.updateNoteText(this.command);
       this.noteStore.updateNoteTitle(this.title);
+      this.noteStore.updateNoteUrl(this.url);
     },
   }
 })
@@ -48,9 +50,11 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     gap: 20px;
-
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    font-family: 'Overpass', sans-serif;
+    padding: 10px;
+    border-radius: 8px;
+    color: #95A5BD;
   }
 
   .generated-note:hover {
