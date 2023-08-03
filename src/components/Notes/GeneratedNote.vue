@@ -54,7 +54,7 @@ export default defineComponent({
     font-family: 'Overpass', sans-serif;
     padding: 10px;
     border-radius: 8px;
-    color: #95A5BD;
+    color: #B2C5E1;
   }
 
   .generated-note:hover {
@@ -63,5 +63,6 @@ export default defineComponent({
 
   .subtext {
     font-size: 14px;
+    color: #76879b;
   }
 </style>
