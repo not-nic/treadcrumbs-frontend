@@ -1,34 +1,24 @@
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, onMounted} from 'vue'
 import axios from "axios";
 import NoteComponent, {Note} from "./Note.vue";
 import CreateNote from "./CreateNote.vue";
 import GeneratedNoteCreator from "./GeneratedNoteCreator.vue";
+import {useNoteStore} from "../../stores/NoteStore.ts";
 
 export default defineComponent({
   name: "Notes",
   components: {GeneratedNoteCreator, CreateNote, NoteComponent},
 
-  data() {
+  setup() {
+    const noteStore = useNoteStore();
+
+    onMounted(() => {
+      noteStore.getNotes()
+    });
+
     return {
-      notes: {} as Note
-    }
-  },
-
-  mounted() {
-    this.getNotes()
-  },
-
-  methods: {
-    async getNotes() {
-      try {
-        const response = await axios.get('api/notes')
-        this.notes = response.data;
-
-        console.log(this.notes)
-      } catch (error) {
-        console.error("Error getting notes", error)
-      }
+      noteStore
     }
   }
 })
@@ -39,9 +29,15 @@ export default defineComponent({
   <div class="note-element">
     <div class="header">
       <h2>Notes</h2>
+      <div class="buttons">
+        <a>Edit</a>
+        <svg @click="noteStore.getNotes()" class="refresh" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 20C7.22917 20 4.86979 19.026 2.92188 17.0781C0.973959 15.1302 0 12.7708 0 10C0 7.22917 0.973959 4.86979 2.92188 2.92188C4.86979 0.973959 7.22917 0 10 0C11.7708 0 13.3229 0.359375 14.6563 1.07813C15.1538 1.34633 15.6267 1.65153 16.0749 1.99371C16.8304 2.57042 18.125 2.08344 18.125 1.13302V0.9375C18.125 0.419733 18.5447 0 19.0625 0V0C19.5803 0 20 0.419733 20 0.9375V6.9375C20 7.48979 19.5523 7.9375 19 7.9375H13C12.4822 7.9375 12.0625 7.51777 12.0625 7V7C12.0625 6.48223 12.4822 6.0625 13 6.0625H15.4955C16.2836 6.0625 16.7435 5.20102 16.2075 4.62323C15.6398 4.01119 14.9977 3.48052 14.2813 3.03125C13.0521 2.26042 11.625 1.875 10 1.875C7.72917 1.875 5.80729 2.66146 4.23437 4.23437C2.66146 5.80729 1.875 7.72917 1.875 10C1.875 12.2708 2.66146 14.1927 4.23437 15.7656C5.80729 17.3385 7.72917 18.125 10 18.125C11.7292 18.125 13.3125 17.6302 14.75 16.6406C15.9956 15.7832 16.9127 14.6872 17.5013 13.3527C17.6658 12.9797 18.0234 12.7188 18.4311 12.7188V12.7188C19.063 12.7188 19.5224 13.3227 19.2836 13.9077C18.6117 15.5534 17.5484 16.9174 16.0938 18C14.3021 19.3333 12.2708 20 10 20Z" fill="#B2C5E1"/>
+        </svg>
+      </div>
     </div>
     <div class="notes">
-      <note-component v-for="note in notes" :key="note.id" :note="note"></note-component>
+      <note-component v-for="note in noteStore.notes" :key="note.id" :note="note"></note-component>
     </div>
     <generated-note-creator></generated-note-creator>
     <create-note></create-note>
@@ -57,6 +53,12 @@ export default defineComponent({
   border: 2px solid rgba(89, 89, 89, 0.30);
   border-radius: 15px;
 }
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .note-element {
   background: rgba(0, 0, 0, 0.10);
@@ -65,7 +67,7 @@ export default defineComponent({
   overflow: auto;
   border: 2px solid rgba(89, 89, 89, 0.30);
   border-radius: 15px;
-
+  max-height: 720px;
   position: relative;
 
   display: flex;
@@ -76,5 +78,8 @@ export default defineComponent({
 .notes {
   flex: 1;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 </style>
