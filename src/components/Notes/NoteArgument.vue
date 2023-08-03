@@ -47,7 +47,7 @@ export default defineComponent({
 
 <template>
   <div class="argument">
-    <label>{{ Object.keys(argument)[0] }}</label>
+    <label>{{ Object.keys(argument)[0] }}:</label>
     <input @keyup="addData" v-model="data" :type="type"/>
   </div>
 </template>
@@ -60,7 +60,19 @@ export default defineComponent({
     gap: 5px;
   }
 
+  label {
+    color: #76879b;
+  }
+
   input {
     width: 100%;
+    padding: 2px;
+    border-radius: 4px;
+    border: none;
+  }
+
+  input:focus {
+    outline: none;
+    border: 2px solid #95A5BD;
   }
 </style>
