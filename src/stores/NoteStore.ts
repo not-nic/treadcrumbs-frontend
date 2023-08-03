@@ -114,6 +114,17 @@ export const useNoteStore = defineStore('noteStore', {
             this.postGeneratedNote()
         },
 
+        async getNotes() {
+            try {
+                const response = await axios.get('api/notes')
+                this.notes = response.data;
+
+                console.log(this.notes)
+            } catch (error) {
+                console.error("Error getting notes", error)
+            }
+        },
+
         async postGeneratedNote() {
             try {
                 const response = await axios.post(`/api/notes${this.url}`, {
@@ -124,6 +135,7 @@ export const useNoteStore = defineStore('noteStore', {
                 });
 
                 console.log(response)
+                this.getNotes();
 
                 // reset command to an empty string
                 // this.command = "";
@@ -131,8 +143,29 @@ export const useNoteStore = defineStore('noteStore', {
                 this.hideGeneratingNote();
                 this.closeNoteCreator();
 
+
             } catch (error) {
                 console.error("Failed to create note:", error)
+            }
+        },
+
+        async postRegularNote() {
+
+            if (this.command.length > 5) {
+                try {
+                    const response = await axios.post('api/notes', {
+                        author: "nick",
+                        contents: this.command,
+                        generated: false,
+                        additionalNoteData: {}
+                    })
+
+                    console.log(response)
+
+                    this.getNotes();
+                } catch (error) {
+                    console.error("Failed to create note:", error)
+                }
             }
         }
     }
