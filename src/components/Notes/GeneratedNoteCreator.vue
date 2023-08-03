@@ -68,13 +68,13 @@ export default defineComponent({
                       :command="`/Mulch @arg using @arg`"
       ></generated-note>
       <generated-note :url="'/fieldwork'"
-                      :title="'/Rolling'"
+                      :title="'/Roll'"
                       :subtext="'use this command for rolling fields.'"
                       :arguments="[
                         {field: 0, type: 'number'},
                         {vehicle: 0, type: 'number'}
                     ]"
-                      :command="`/Rolling @arg using @arg`"
+                      :command="`/Roll @arg using @arg`"
       ></generated-note>
     </div>
   </div>
