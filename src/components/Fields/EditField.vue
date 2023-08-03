@@ -46,7 +46,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
+  <div class="edit">
     <h2 v-if="!creatingField">Editing field {{field.id}}:</h2>
     <h2 v-else>Create New field</h2>
     <form onsubmit="return false">
@@ -118,6 +118,10 @@ export default defineComponent({
 </template>
 
 <style scoped>
+
+.edit {
+  width: 100%;
+}
 
 form {
   width: 100%;

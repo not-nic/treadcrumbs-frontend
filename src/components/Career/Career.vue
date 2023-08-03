@@ -65,7 +65,7 @@ export default defineComponent({
 <div class="container">
   <div class="career">
     <div class="dashboard-element">
-      <h2>Farm Finances</h2>
+      <h2>Farm Info</h2>
       <div class="buttons">
         <a>Edit</a>
         <svg @click="getCareer()" class="refresh" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

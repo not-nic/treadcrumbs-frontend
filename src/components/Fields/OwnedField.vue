@@ -358,6 +358,7 @@ h3 {
   padding: 10px;
   border-radius: 12px;
   border: 2px solid #32373F;
+  width: 640px;
 }
 
 .field-info {
