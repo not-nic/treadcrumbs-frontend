@@ -4,7 +4,7 @@ It works by uploading a Farming Simulator 22 save game which is read and display
 
 ![Dashboard](https://i.imgur.com/2Ljt9oD.png)
 
-Once the contents of the save game are read, it will be shown back to the user through this frontend - showing the user how they can improve the efficiency of their virtual farm.
+Once the contents of the save game are read, it will be shown back to the user through this frontend - showing the user how they can improve the efficiency of their virtual farm.\
 The main features are:
 - Fields: This shows all the stats about a players field and how their yields can be improved.
 - Notes: This allows either users to type plaintext to remind them of something to do, or a discord-esque slash command system to quickly generate repetitive notes.
