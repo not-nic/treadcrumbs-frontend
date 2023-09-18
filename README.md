@@ -1,22 +1,22 @@
 # Treadcrumbs Frontend - A Farming Simulator Companion and Analysis web application.
 ![Dashboard](https://i.imgur.com/2Ljt9oD.png)
 ## Project Description
-This is the frontend for my dissertation project. This is an analysis and companion web application for Farming Simulator 22, which improves player productivity through different [features.](#features) Once the save game XML is parsed by the Spring Boot backend ([See the repository here](https://github.com/not-nic/treadcrumbs-backend)), the stored data is then requested across different Vue dashboard components.
+This is the frontend for my dissertation project. This is an analytical and companion web application for Farming Simulator 22, which improves player productivity through different [features.](#features) Once the save game XML is parsed by the Spring Boot backend ([See the repository here](https://github.com/not-nic/treadcrumbs-backend)), the stored data is then requested across different Vue dashboard components.
 
 Most of the dashboard components are finished, but require improvement. Like the backend there are some choices which may seem silly, but are intentional. Particularly, the use of `$emit` and Pinia Stores to pass data between child components. I do this because within my report I talk about issues with [prop drilling](https://vuejs.org/guide/components/provide-inject.html#prop-drilling) and its disadvantages.
 
 ### Features
 The dashboard is spilt up into five elements, which are listed below:
-![Vehicles Gif](https://i.imgur.com/dKvbhLA.gif)
-- **Vehicle Maintenance** – This lists all the vehicles and attachments found within an upload save game, which allows users to see all stats about their vehicle such as durability and fuel without entering it in game.
-![Fields Gif](https://i.imgur.com/RTtBqV9.gif)
-- **Fields** - The first element on the dashboard shows the total farm area and the combined amount of area each crop type takes up, as a table and pie chart. Clicking the view button shows a detailed look at each field and what is required to improve their yield.\
-![Notes Gif](https://i.imgur.com/Ke43tjA.gif)
-- **Notes** - This allows either users to type plaintext to remind them of something to do, or a discord-esque slash command system to quickly generate repetitive notes.\
-![Finance Gif](https://i.imgur.com/91J5PFE.gif)
-- **Finances** -  This shows all finance data taken from the save game - allowing users to view a breakdown of costs related to their farm.\
-![Map Gif](https://i.imgur.com/xf3DpuN.gif)
-- **Map** - This allows a user to upload a map image that can be panned and zoomed, I had planned additional functionality, which would allow users to generate 'absolute' positioned SVG images to represent their in-game fields, which can be seen in the mockups.
+
+- **Vehicle Maintenance** – This lists all the vehicles and attachments found within an upload save game, which allows users to see all stats about their vehicle such as durability and fuel without entering it in game. [Vehicles Gif](https://i.imgur.com/dKvbhLA.gif)
+
+- **Fields** - The first element on the dashboard shows the total farm area and the combined amount of area each crop type takes up, as a table and pie chart. Clicking the view button shows a detailed look at each field and what is required to improve their yield. [Fields Gif](https://i.imgur.com/RTtBqV9.gif)
+
+- **Notes** - This allows either users to type plaintext to remind them of something to do, or a discord-esque slash command system to quickly generate repetitive notes. [Notes Gif](https://i.imgur.com/Ke43tjA.gif)
+
+- **Finances** -  This shows all finance data taken from the save game - allowing users to view a breakdown of costs related to their farm. [Finance Gif](https://i.imgur.com/91J5PFE.gif)
+
+- **Map** - This allows a user to upload a map image that can be panned and zoomed, I had planned additional functionality, which would allow users to generate 'absolute' positioned SVG images to represent their in-game fields, which can be seen in the mockups. [Map Gif](https://i.imgur.com/xf3DpuN.gif)
 
 ## Prototypes
 The Mock-ups and Wireframes for the dashboard can be found below:
