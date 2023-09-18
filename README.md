@@ -3,7 +3,7 @@
 ## Project Description
 This is the frontend for my dissertation project. This is an analytical and companion web application for Farming Simulator 22, which improves player productivity through different [features.](#features) Once the save game XML is parsed by the Spring Boot backend ([See the repository here](https://github.com/not-nic/treadcrumbs-backend)), the stored data is then requested across different Vue dashboard components.
 
-Most of the dashboard components are finished, but require improvement. Like the backend there are some choices which may seem silly, but are intentional. Particularly, the use of `$emit` and Pinia Stores to pass data between child components. I do this because within my report I talk about issues with [prop drilling](https://vuejs.org/guide/components/provide-inject.html#prop-drilling) and its disadvantages.
+Most of the dashboard components are finished but require improvement. Like the backend there are some choices which may seem silly but they are intentional. Particularly, the use of `$emit` and Pinia Stores to pass data between child components. I do this because within my report I talk about issues with [prop drilling](https://vuejs.org/guide/components/provide-inject.html#prop-drilling) and its disadvantages.
 
 ### Features
 The dashboard is spilt up into five elements, which are listed below:
