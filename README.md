@@ -16,7 +16,7 @@ The dashboard is spilt up into five elements, which are listed below:
 ![Finance Gif](https://i.imgur.com/91J5PFE.gif)
 - **Finances** -  This shows all finance data taken from the save game - allowing users to view a breakdown of costs related to their farm.\
 ![Map Gif](https://i.imgur.com/xf3DpuN.gif)
-- **Map** - This allows a user to upload a map image that can be panned and zoomed, I had planned additional functionality, which would allow users to generate 'absolute' positioned SVG images to represent their in-game fields, which can be seen in the mockups.\
+- **Map** - This allows a user to upload a map image that can be panned and zoomed, I had planned additional functionality, which would allow users to generate 'absolute' positioned SVG images to represent their in-game fields, which can be seen in the mockups.
 
 ## Prototypes
 The Mock-ups and Wireframes for the dashboard can be found below:
