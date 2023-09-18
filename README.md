@@ -8,8 +8,7 @@ Most of the dashboard components are finished, but require improvement. Like the
 ### Features
 The dashboard is spilt up into five elements, which are listed below:
 ![Vehicles Gif](https://i.imgur.com/dKvbhLA.gif)
-- **Vehicle Maintenance** – This lists all the vehicles and attachments found within an upload save game, which allows users to see all stats about their vehicle such as durability and fuel without entering it in game.\
-
+- **Vehicle Maintenance** – This lists all the vehicles and attachments found within an upload save game, which allows users to see all stats about their vehicle such as durability and fuel without entering it in game.
 ![Fields Gif](https://i.imgur.com/RTtBqV9.gif)
 - **Fields** - The first element on the dashboard shows the total farm area and the combined amount of area each crop type takes up, as a table and pie chart. Clicking the view button shows a detailed look at each field and what is required to improve their yield.\
 ![Notes Gif](https://i.imgur.com/Ke43tjA.gif)
