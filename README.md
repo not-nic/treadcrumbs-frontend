@@ -1,20 +1,30 @@
 
-# Treadcrumbs Frontend - A Farming Simulator Companion and Analysis web application.
-This is the frontend for my final university project. It is a analysis and companion web application for Farming Simulator 22. 
-It works by uploading a Farming Simulator 22 save game which is read and displayed to the user using Spring Boot. (The SpringBoot backend can be found [here](https://github.com/not-nic/treadcrumbs).)
 
+# Treadcrumbs Frontend - A Farming Simulator Companion and Analysis web application.
 ![Dashboard](https://i.imgur.com/2Ljt9oD.png)
 ## Project Description
-Once the contents of the save game are read, it will be shown back to the user through this frontend - showing the user how they can improve the efficiency of their virtual farm.\
-The main features are:
-- Fields: This shows all the stats about a players field and how their yields can be improved.
-- Notes: This allows either users to type plaintext to remind them of something to do, or a discord-esque slash command system to quickly generate repetitive notes.
-- Vehicles: This shows all the vehicles and attachments within the save game, alongside their fuel level, durability and last job, so a user can check their state without entering them in game.
-- Finances: This shows all data taken about the save game about the user's finances - allowing them to add money by selling crops & goods and removing money by buying vehicles and fields.
-- Map: This part remains mostly unfinished due to time constraints (but I hope to come back to it in the future), but it allows the user to upload an overview.png file from the save game map files. It currently supports zoom and moving it by clicking and dragging.
+This is the frontend for my dissertation project. This is an analytical and companion web application for Farming Simulator 22, which improves player productivity through different [features.](#features) Once the save game XML is parsed by the Spring Boot backend ([See the repository here](https://github.com/not-nic/treadcrumbs-backend)), the stored data is then requested across different Vue dashboard components.
+
+Most of the dashboard components are finished, but require improvement. Like the backend there are some choices which may seem silly, but are intentional. Particularly, the use of `$emit` and Pinia Stores to pass data between child components. I do this because within my report I talk about issues with [prop drilling](https://vuejs.org/guide/components/provide-inject.html#prop-drilling) and its disadvantages.
+
+### Features
+The dashboard is spilt up into five elements, which are listed below:
+![Vehicles Gif](https://i.imgur.com/dKvbhLA.gif)
+- **Vehicle Maintenance** – This lists all the vehicles and attachments found within an upload save game, which allows users to see all stats about their vehicle such as durability and fuel without entering it in game.
+
+![Fields Gif](https://i.imgur.com/RTtBqV9.gif)
+- **Fields** - The first element on the dashboard shows the total farm area and the combined amount of area each crop type takes up, as a table and pie chart. Clicking the view button shows a detailed look at each field and what is required to improve their yield.
+![Notes Gif](https://i.imgur.com/Ke43tjA.gif)
+- **Notes** - This allows either users to type plaintext to remind them of something to do, or a discord-esque slash command system to quickly generate repetitive notes.
+![Finance Gif](https://i.imgur.com/91J5PFE.gif)
+- **Finances** -  This shows all finance data taken from the save game - allowing users to view a breakdown of costs related to their farm.
+![Map Gif](https://i.imgur.com/xf3DpuN.gif)
+- **Map** - This allows a user to upload a map image that can be panned and zoomed, I had planned additional functionality, which would allow users to generate 'absolute' positioned SVG images to represent their in-game fields, which can be seen in the mockups.
+
 ## Prototypes
 The Mock-ups and Wireframes for the dashboard can be found below:
 ### [Mockups](https://www.figma.com/file/EOn8PPY4cgGB29cBBp3XdK/Mockups?type=design&node-id=168%3A315&mode=design&t=Uzp93VEuUC2rzx5p-1)
+
 ## Install Guide
 1. Clone this repository on your machine using the following command:
 ```bash
@@ -25,10 +35,8 @@ cd treadcrumbs-frontend
 ```bash
 npm install
 ```
-4. Start a development server by using:
+3. Start a development server by using:
 ```bash
 npm run dev
 ```
-5. Access the app by visiting [http://localhost:5173/](http://localhost:5173/)
-
-
+4. Access the app by visiting [http://localhost:5173/](http://localhost:5173/)
