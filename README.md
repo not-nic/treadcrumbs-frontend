@@ -18,6 +18,10 @@ The dashboard is spilt up into five elements, which are listed below:
 
 - **Map** - This allows a user to upload a map image that can be panned and zoomed, I had planned additional functionality, which would allow users to generate 'absolute' positioned SVG images to represent their in-game fields, which can be seen in the mockups. [Map Gif](https://i.imgur.com/xf3DpuN.gif)
 
+### Example files
+[project_savegame.zip](https://github.com/not-nic/treadcrumbs-frontend/files/12649580/project_savegame.zip)
+[overview.png](https://github.com/not-nic/treadcrumbs-frontend/assets/67616855/cdc22ab0-31d7-4d1f-889f-8eae41345ec3)
+
 ## Prototypes
 The Mock-ups and Wireframes for the dashboard can be found below:
 ### [Mockups](https://www.figma.com/file/EOn8PPY4cgGB29cBBp3XdK/Mockups?type=design&node-id=168%3A315&mode=design&t=Uzp93VEuUC2rzx5p-1)
