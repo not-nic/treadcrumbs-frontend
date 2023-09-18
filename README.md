@@ -12,11 +12,9 @@ The main features are:
 - Vehicles: This shows all the vehicles and attachments within the save game, alongside their fuel level, durability and last job, so a user can check their state without entering them in game.
 - Finances: This shows all data taken about the save game about the user's finances - allowing them to add money by selling crops & goods and removing money by buying vehicles and fields.
 - Map: This part remains mostly unfinished due to time constraints (but I hope to come back to it in the future), but it allows the user to upload an overview.png file from the save game map files. It currently supports zoom and moving it by clicking and dragging.
-
 ## Prototypes
-The prototypes for this dashboard, from wireframes to mockups can be found on Figma.
-https://www.figma.com/file/EOn8PPY4cgGB29cBBp3XdK/Mockups?type=design&node-id=168%3A315&mode=design&t=Uzp93VEuUC2rzx5p-1
-
+The Mock-ups and Wireframes for the dashboard can be found below:
+### [Mockups](https://www.figma.com/file/EOn8PPY4cgGB29cBBp3XdK/Mockups?type=design&node-id=168%3A315&mode=design&t=Uzp93VEuUC2rzx5p-1)
 ## Install Guide
 1. Clone this repository on your machine using the following command:
 ```bash
